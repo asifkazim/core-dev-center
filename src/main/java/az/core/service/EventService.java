@@ -1,17 +1,17 @@
 package az.core.service;
 
-import az.core.model.entity.Event;
+import az.core.model.dto.EventDto;
 
 import java.util.List;
 
 public interface EventService {
-    List<Event> getAllEvent();
+    List<EventDto> getAllEvents();
 
-    Event getById(Long id);
+    EventDto getById(Long id);
 
-    Event addEvent(Event event);
+    EventDto addEvent(EventDto eventDto);
 
-    Event updateEvent(Long id,Event event);
+    EventDto updateEvent(Long id, EventDto eventDto);
 
     void deleteEvent(Long id);
 }

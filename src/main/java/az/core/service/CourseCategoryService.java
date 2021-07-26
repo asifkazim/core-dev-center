@@ -1,17 +1,18 @@
 package az.core.service;
 
-import az.core.model.entity.CourseCategory;
+import az.core.model.dto.CourseCategoryDto;
 
 import java.util.List;
 
 public interface CourseCategoryService {
-    List<CourseCategory> getAllCategories();
 
-    CourseCategory getById(Long id);
+    List<CourseCategoryDto> getAllCategories();
 
-    CourseCategory addCategory(CourseCategory courseCategory);
+    CourseCategoryDto getById(Long id);
 
-    CourseCategory updateCategory(CourseCategory courseCategory);
+    void addCategory(String categoryName);
+
+    CourseCategoryDto updateCategory(Long id, CourseCategoryDto courseCategoryDto);
 
     void deleteCategory(Long id);
 }

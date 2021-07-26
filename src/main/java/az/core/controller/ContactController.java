@@ -1,8 +1,9 @@
 package az.core.controller;
 
-import az.core.model.entity.Contact;
+import az.core.model.dto.ContactDto;
 import az.core.service.ContactService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,27 +15,31 @@ public class ContactController {
     private final ContactService contactService;
 
     @GetMapping
-    public List<Contact> getAllContacts() {
-        return contactService.getAllContact();
+    public ResponseEntity<List<ContactDto>> getAllContacts() {
+        List<ContactDto> contacts = contactService.getAllContacts();
+        return ResponseEntity.ok(contacts);
     }
 
     @GetMapping("/{id}")
-    public Contact getById(@PathVariable Long id) {
-        return contactService.getById(id);
-    }
+    public ResponseEntity<ContactDto> getById(@PathVariable Long id) {
+        ContactDto contact = contactService.getById(id);
+        return ResponseEntity.ok(contact);    }
 
     @PostMapping
-    public Contact addContact(@RequestBody Contact contact) {
-        return contactService.addContact(contact);
+    public ResponseEntity<ContactDto> addContact(@RequestBody ContactDto contactDto) {
+        ContactDto contact = contactService.addContact(contactDto);
+        return ResponseEntity.ok(contact);
     }
 
     @PutMapping("/{id}")
-    public Contact updateContact(@PathVariable Long id, @RequestBody Contact contact) {
-        return contactService.updateContact(id,contact);
+    public ResponseEntity<ContactDto> updateContact(@PathVariable Long id, @RequestBody ContactDto contactDto) {
+        ContactDto contact = contactService.updateContact(id, contactDto);
+        return ResponseEntity.ok(contact);
     }
 
     @DeleteMapping("/{id}")
     public void deleteContact(@PathVariable Long id) {
         contactService.deleteContact(id);
     }
+
 }

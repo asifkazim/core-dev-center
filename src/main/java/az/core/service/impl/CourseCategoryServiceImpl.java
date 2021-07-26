@@ -1,5 +1,7 @@
 package az.core.service.impl;
 
+import az.core.mapper.CourseCategoryMapper;
+import az.core.model.dto.CourseCategoryDto;
 import az.core.model.entity.CourseCategory;
 import az.core.repository.CourseCategoryRepository;
 import az.core.service.CourseCategoryService;
@@ -8,33 +10,46 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class CourseCategoryServiceImpl implements CourseCategoryService {
 
     private final CourseCategoryRepository categoryRepository;
+    private final CourseCategoryMapper courseCategoryMapper;
 
 
     @Override
-    public List<CourseCategory> getAllCategories() {
-        return categoryRepository.findAll();
+    public List<CourseCategoryDto> getAllCategories() {
+        List<CourseCategory> category = categoryRepository.findAll();
+        return courseCategoryMapper.entitiesToDto(category);
     }
 
     @Override
-    public CourseCategory getById(Long id) {
-        return categoryRepository.getOne(id);
+    public CourseCategoryDto getById(Long id) {
+        CourseCategory category = categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return courseCategoryMapper.entityToDto(category);
     }
 
     @Override
-    public CourseCategory addCategory(CourseCategory courseCategory) {
-        return categoryRepository.save(courseCategory);
+    public void addCategory(String categoryName) {
+        CourseCategory courseCategory;
+        courseCategory = new CourseCategory();
+        courseCategory.setName(categoryName);
+        categoryRepository.save(courseCategory);
     }
 
     @Override
-    public CourseCategory updateCategory(CourseCategory courseCategory) {
-        CourseCategory existCategory = categoryRepository.getOne(courseCategory.getId());
-        existCategory.setName(courseCategory.getName());
-        return categoryRepository.save(existCategory);
+    public CourseCategoryDto updateCategory(Long id, CourseCategoryDto courseCategoryDto) {
+
+        CourseCategory courseCategory;
+        courseCategory = categoryRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+
+        if (courseCategory != null) {
+            courseCategory = courseCategoryMapper.dtoToEntity(courseCategoryDto);
+        }
+        categoryRepository.save(courseCategory);
+
+        return courseCategoryDto;
     }
 
     @Override

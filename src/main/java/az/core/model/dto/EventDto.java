@@ -5,17 +5,19 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-
 @Getter
 @Setter
 @NoArgsConstructor
-public class BlogDto {
-
+public class EventDto {
     private Long id;
-    private String publicationDate;
+    private String name;
+    private String startTime;
+    private String payment;
+    private String period;
+    private String place;
     private String description;
-    private String blogCategoryDto;
+    private String remainingPeriod;
+    private String moderator;
     private String status;
     private MultipartFile image;
-
 }

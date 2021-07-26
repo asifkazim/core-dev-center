@@ -1,8 +1,9 @@
 package az.core.controller;
 
-import az.core.model.entity.Course;
+import az.core.model.dto.CourseDto;
 import az.core.service.CourseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,31 +15,32 @@ public class CourseController {
 
     private final CourseService courseService;
 
-
     @GetMapping
-    public List<Course> getAllCourses() {
-        return courseService.getAllCourse();
+    public ResponseEntity<List<CourseDto>> getAllCourses() {
+        List<CourseDto> courses = courseService.getAllCourse();
+        return ResponseEntity.ok(courses);
     }
 
     @GetMapping("/{id}")
-    public Course getById(@PathVariable Long id) {
-        return courseService.getById(id);
+    public ResponseEntity<CourseDto> getById(@PathVariable Long id) {
+        CourseDto course = courseService.getById(id);
+        return ResponseEntity.ok(course);
     }
 
     @PostMapping
-    public Course addCourse(@RequestBody Course course) {
-        return courseService.addCourse(course);
+    public ResponseEntity<CourseDto> addCourse(@RequestBody CourseDto courseDto) throws Exception {
+        CourseDto course = courseService.addCourse(courseDto);
+        return ResponseEntity.ok(course);
     }
 
     @PutMapping("/{id}")
-    public Course updateCourse(@PathVariable Long id, @RequestBody Course course) {
-        return courseService.updateCourse(id, course);
+    public ResponseEntity<CourseDto> updateCourse(@PathVariable Long id, @RequestBody CourseDto courseDto) {
+        CourseDto course = courseService.updateCourse(id, courseDto);
+        return ResponseEntity.ok(course);
     }
 
     @DeleteMapping("/{id}")
     public void deleteCourse(@PathVariable Long id) {
         courseService.deleteCourse(id);
     }
-
-
 }

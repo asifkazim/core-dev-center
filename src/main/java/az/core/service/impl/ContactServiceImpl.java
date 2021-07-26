@@ -1,5 +1,7 @@
 package az.core.service.impl;
 
+import az.core.mapper.ContactMapper;
+import az.core.model.dto.ContactDto;
 import az.core.model.entity.Contact;
 import az.core.repository.ContactRepository;
 import az.core.service.ContactService;
@@ -13,31 +15,37 @@ import java.util.List;
 public class ContactServiceImpl implements ContactService {
 
     private final ContactRepository contactRepository;
+    private final ContactMapper contactMapper;
 
     @Override
-    public List<Contact> getAllContact() {
-        return contactRepository.findAll();
+    public List<ContactDto> getAllContacts() {
+        List<Contact> contacts = contactRepository.findAll();
+        return contactMapper.entitiesToDto(contacts);
     }
 
     @Override
-    public Contact getById(Long id) {
-        return contactRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    public ContactDto getById(Long id) {
+        Contact contact = contactRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return contactMapper.entityToDto(contact);
     }
 
     @Override
-    public Contact addContact(Contact contact) {
-        return contactRepository.save(contact);
+    public ContactDto addContact(ContactDto contactDto) {
+        Contact contact = contactMapper.dtoToEntity(contactDto);
+        contactRepository.save(contact);
+        return contactDto;
     }
 
     @Override
-    public Contact updateContact(Long id, Contact contact) {
-        Contact existContact = contactRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        existContact.setName(contact.getName());
-        existContact.setSurname(contact.getSurname());
-        existContact.setEmail(contact.getEmail());
-        existContact.setHeader(contact.getHeader());
-        existContact.setMessage(contact.getMessage());
-        return contactRepository.save(existContact);
+    public ContactDto updateContact(Long id, ContactDto contactDto) {
+        Contact contact = contactRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+
+        if (contact != null) {
+            contact = contactMapper.dtoToEntity(contactDto);
+            contact.setId(id);
+        }
+        contactRepository.save(contact);
+        return contactDto;
     }
 
     @Override
