@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class BlogCategoryServiceImpl implements BlogCategoryService {
 
     private final BlogCategoryRepository categoryRepository;

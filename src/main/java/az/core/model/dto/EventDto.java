@@ -1,23 +1,14 @@
-package az.core.model.entity;
+package az.core.model.dto;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Transient;
-
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-public class Event {
-
-    @Id
-    @GeneratedValue
+public class EventDto {
     private Long id;
     private String name;
     private String startTime;
@@ -28,6 +19,5 @@ public class Event {
     private String remainingPeriod;
     private String moderator;
     private String status;
-    @Transient
     private MultipartFile image;
 }

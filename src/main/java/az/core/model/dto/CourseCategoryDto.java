@@ -1,6 +1,5 @@
 package az.core.model.dto;
 
-
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,8 +7,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class BlogCategoryDto {
+public class CourseCategoryDto {
 
-    private Long id;
+    private String id;
     private String name;
 }

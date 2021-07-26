@@ -1,7 +1,6 @@
 package az.core.controller;
 
 import az.core.model.dto.BlogCategoryDto;
-import az.core.model.entity.Blog;
 import az.core.service.BlogCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,12 +17,6 @@ public class BlogCategoryController {
 
     private final BlogCategoryService blogCategoryService;
 
-    @PostMapping()
-    public ResponseEntity<?> addBlogCategory(@RequestBody String categoryName) {
-        blogCategoryService.addCategory(categoryName);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
     @GetMapping
     public ResponseEntity<List<BlogCategoryDto>> getAllCategories() {
         List<BlogCategoryDto> categories = blogCategoryService.getAllCategories();
@@ -36,13 +29,19 @@ public class BlogCategoryController {
         return ResponseEntity.ok(categoryDto);
     }
 
+    @PostMapping()
+    public ResponseEntity<?> addBlogCategory(@RequestBody String categoryName) {
+        blogCategoryService.addCategory(categoryName);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
     @PutMapping("/{id}")
     public BlogCategoryDto updateBlogCategory(@PathVariable Long id, @RequestBody BlogCategoryDto blogCategoryDto) {
         return blogCategoryService.updateCategory(id, blogCategoryDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteBlog(@PathVariable Long id) {
+    public void deleteBlogCategory(@PathVariable Long id) {
         blogCategoryService.deleteCategory(id);
     }
 }

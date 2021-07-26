@@ -1,8 +1,6 @@
 package az.core.service;
 
 import az.core.model.dto.BlogDto;
-import az.core.model.entity.Blog;
-
 import java.util.List;
 
 
