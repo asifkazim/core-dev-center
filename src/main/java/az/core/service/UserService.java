@@ -1,17 +1,17 @@
 package az.core.service;
 
-import az.core.model.entity.User;
+import az.core.model.dto.UserDto;
 
 import java.util.List;
 
 public interface UserService {
-    List<User> getAllUser();
+    List<UserDto> getAllUsers();
 
-    User getById(Long id);
+    UserDto getById(Long id);
 
-    User addUser(User user);
+    UserDto addUser(UserDto userDto);
 
-    User updateUser(Long id,User user);
+    UserDto updateUser(Long id, UserDto userDto);
 
     void deleteUser(Long id);
 }

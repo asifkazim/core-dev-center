@@ -1,8 +1,9 @@
 package az.core.controller;
 
-import az.core.model.entity.Event;
+import az.core.model.dto.EventDto;
 import az.core.service.EventService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,27 +16,32 @@ public class EventController {
     private final EventService eventService;
 
     @GetMapping
-    public List<Event> getAllEvent() {
-        return eventService.getAllEvent();
+    public ResponseEntity<List<EventDto>> getAllEvents() {
+        List<EventDto> events = eventService.getAllEvents();
+        return ResponseEntity.ok(events);
     }
 
     @GetMapping("/{id}")
-    public Event getById(@PathVariable Long id) {
-        return eventService.getById(id);
+    public ResponseEntity<EventDto> getById(@PathVariable Long id) {
+        EventDto event = eventService.getById(id);
+        return ResponseEntity.ok(event);
     }
 
     @PostMapping
-    public Event addEvent(@RequestBody Event event) {
-        return eventService.addEvent(event);
+    public ResponseEntity<EventDto> addEvent(@RequestBody EventDto eventDto) {
+        EventDto event = eventService.addEvent(eventDto);
+        return ResponseEntity.ok(event);
     }
 
     @PutMapping("/{id}")
-    public Event updateEvent(@PathVariable Long id, @RequestBody Event event) {
-        return eventService.updateEvent(id,event);
+    public ResponseEntity<EventDto> updateEvent(@PathVariable Long id, @RequestBody EventDto eventDto) {
+        EventDto event = eventService.updateEvent(id, eventDto);
+        return ResponseEntity.ok(event);
     }
 
     @DeleteMapping("/{id}")
     public void deleteEvent(@PathVariable Long id) {
         eventService.deleteEvent(id);
     }
+
 }

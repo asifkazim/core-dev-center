@@ -1,8 +1,9 @@
 package az.core.controller;
 
-import az.core.model.entity.User;
+import az.core.model.dto.UserDto;
 import az.core.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,23 +16,27 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> getAllUser() {
-        return userService.getAllUser();
+    public ResponseEntity<List<UserDto>> getAllUsers() {
+        List<UserDto> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 
     @GetMapping("/{id}")
-    public User getById(@PathVariable Long id) {
-        return userService.getById(id);
+    public ResponseEntity<UserDto> getById(@PathVariable Long id) {
+        UserDto user = userService.getById(id);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping
-    public User addUser(@RequestBody User user) {
-        return userService.addUser(user);
+    public ResponseEntity<UserDto> addUser(@RequestBody UserDto userDto) {
+        UserDto user = userService.addUser(userDto);
+        return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{id}")
-    public User updateUser(@PathVariable Long id, @RequestBody User user) {
-        return userService.updateUser(id,user);
+    public ResponseEntity<UserDto> updateUser(@PathVariable Long id, @RequestBody UserDto userDto) {
+        UserDto user = userService.updateUser(id, userDto);
+        return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/{id}")

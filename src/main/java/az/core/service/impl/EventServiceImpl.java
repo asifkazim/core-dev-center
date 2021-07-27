@@ -1,5 +1,7 @@
 package az.core.service.impl;
 
+import az.core.mapper.EventMapper;
+import az.core.model.dto.EventDto;
 import az.core.model.entity.Event;
 import az.core.repository.EventRepository;
 import az.core.service.EventService;
@@ -10,39 +12,41 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Service
-public class EventServiceImpl  implements EventService {
+public class EventServiceImpl implements EventService {
 
     private final EventRepository eventRepository;
+    private final EventMapper eventMapper;
 
     @Override
-    public List<Event> getAllEvent() {
-        return eventRepository.findAll();
+    public List<EventDto> getAllEvents() {
+        List<Event> events = eventRepository.findAll();
+        return eventMapper.entitiesToDto(events);
     }
 
     @Override
-    public Event getById(Long id) {
-        return eventRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+    public EventDto getById(Long id) {
+        Event event = eventRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+        return eventMapper.entityToDto(event);
     }
 
     @Override
-    public Event addEvent(Event event) {
-        return eventRepository.save(event);
+    public EventDto addEvent(EventDto eventDto) {
+        Event event = eventMapper.dtoToEntity(eventDto);
+        eventRepository.save(event);
+        return eventDto;
     }
 
     @Override
-    public Event updateEvent(Long id,Event event) {
-        Event existEvent = eventRepository.findById(id).orElseThrow(IllegalArgumentException::new);
-        existEvent.setName(event.getName());
-        existEvent.setStartTime(event.getStartTime());
-        existEvent.setPayment(event.getPayment());
-        existEvent.setPeriod(event.getPeriod());
-        existEvent.setPlace(event.getPlace());
-        existEvent.setDescription(event.getDescription());
-        existEvent.setRemainingPeriod(event.getRemainingPeriod());
-        existEvent.setModerator(event.getModerator());
-        existEvent.setStatus(event.getStatus());
-        existEvent.setImage(event.getImage());
-        return eventRepository.save(existEvent);
+    public EventDto updateEvent(Long id, EventDto eventDto) {
+        Event event = eventRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+
+        if (event != null) {
+            event = eventMapper.dtoToEntity(eventDto);
+            event.setId(id);
+        }
+        eventRepository.save(event);
+        return eventDto;
+
     }
 
     @Override

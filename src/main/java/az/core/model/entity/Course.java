@@ -6,11 +6,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
 public class Course implements Serializable {
 
     @Id
@@ -19,8 +19,7 @@ public class Course implements Serializable {
     private String name;
     private String cost;
     private String time;
-    @JoinColumn
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private CourseCategory courseCategory;
     private String description;
     private String courseMethod;

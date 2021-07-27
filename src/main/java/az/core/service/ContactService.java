@@ -1,17 +1,17 @@
 package az.core.service;
 
-import az.core.model.entity.Contact;
+import az.core.model.dto.ContactDto;
 
 import java.util.List;
 
 public interface ContactService {
-    List<Contact> getAllContact();
+    List<ContactDto> getAllContacts();
 
-    Contact getById(Long id);
+    ContactDto getById(Long id);
 
-    Contact addContact(Contact contact);
+    ContactDto addContact(ContactDto contactDto);
 
-    Contact updateContact(Long id,Contact contact);
+    ContactDto updateContact(Long id, ContactDto contactDto);
 
     void deleteContact(Long id);
 }

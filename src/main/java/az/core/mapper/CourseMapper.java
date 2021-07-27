@@ -1,7 +1,7 @@
 package az.core.mapper;
 
-import az.core.model.dto.BlogDto;
-import az.core.model.entity.Blog;
+import az.core.model.dto.CourseDto;
+import az.core.model.entity.Course;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
@@ -10,11 +10,11 @@ import java.util.List;
 @Mapper(componentModel = "spring",
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
-public interface BlogMapper {
+public interface CourseMapper {
 
-    List<BlogDto> entitiesToDto(List<Blog> blog);
+    List<CourseDto> entitiesToDto(List<Course> courses);
 
-    BlogDto entityToDto(Blog blog);
+    CourseDto entityToDto(Course course);
 
-    Blog dtoToEntity(BlogDto blogDto);
+    Course dtoToEntity(CourseDto courseDto);
 }

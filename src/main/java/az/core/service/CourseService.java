@@ -1,17 +1,18 @@
 package az.core.service;
 
-import az.core.model.entity.Course;
+import az.core.model.dto.CourseDto;
 
 import java.util.List;
 
 public interface CourseService {
-    List<Course> getAllCourse();
 
-    Course getById(Long id);
+    List<CourseDto> getAllCourse();
 
-    Course addCourse(Course course);
+    CourseDto getById(Long id);
 
-    Course updateCourse(Long id,Course course);
+    CourseDto addCourse(CourseDto courseDto) throws Exception;
+
+    CourseDto updateCourse(Long id, CourseDto courseDto);
 
     void deleteCourse(Long id);
 }

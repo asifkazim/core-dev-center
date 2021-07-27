@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@RequiredArgsConstructor
 @Service
+@RequiredArgsConstructor
 public class BlogServiceImpl implements BlogService {
 
     private final BlogRepository blogRepository;
@@ -29,20 +29,20 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public BlogDto getById(Long id) {
 
-        Blog blog = blogRepository.findById(id).orElseThrow(() -> new IllegalArgumentException());
+        Blog blog = blogRepository.findById(id).orElseThrow(IllegalArgumentException::new);
         return blogMapper.entityToDto(blog);
     }
 
     @Override
     public BlogDto addBlog(BlogDto blogDto) throws Exception {
         BlogCategory category = blogCategoryRepository.findByName(blogDto.getBlogCategoryDto());
-        if (category != null){
+        if (category != null) {
 
-                Blog blog = blogMapper.dtoToEntity(blogDto);
-                blog.setBlogCategory(category);
-                blogRepository.save(blog);
-                return blogDto;
-        }else {
+            Blog blog = blogMapper.dtoToEntity(blogDto);
+            blog.setBlogCategory(category);
+            blogRepository.save(blog);
+            return blogDto;
+        } else {
             throw new Exception();
         }
 

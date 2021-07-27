@@ -1,6 +1,6 @@
 package az.core.config;
 
-import az.core.model.entity.User;
+import az.core.model.dto.UserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,7 +31,7 @@ public class MailConfiguration {
     String port;
 
 
-    public void sendMail(User user) {
+    public void sendMail(UserDto userDto) {
         try {
             Properties properties = System.getProperties();
             properties.setProperty("mail.smtp.host", host);
@@ -51,7 +51,7 @@ public class MailConfiguration {
             message.setFrom(new InternetAddress(username));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
             message.setSubject("Test Mail from Java Program");
-            message.setText("User id:" + user.getId() + "User name" + user.getName());
+            message.setText("User id:" + userDto.getId() + "User name" + userDto.getName());
             Transport.send(message);
             System.out.println("Email Sent successfully....");
         } catch (Exception mex) {
