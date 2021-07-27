@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class CourseCategoryDto {
-
     private String id;
     private String name;
 }
