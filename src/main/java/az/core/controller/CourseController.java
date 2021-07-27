@@ -17,7 +17,7 @@ public class CourseController {
 
     @GetMapping
     public ResponseEntity<List<CourseDto>> getAllCourses() {
-        List<CourseDto> courses = courseService.getAllCourse();
+        List<CourseDto> courses = courseService.getAllCourses();
         return ResponseEntity.ok(courses);
     }
 

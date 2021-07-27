@@ -14,7 +14,7 @@ public class BlogDto {
     private Long id;
     private String publicationDate;
     private String description;
-    private String blogCategoryDto;
+    private String blogCategory;
     private String status;
     private MultipartFile image;
 

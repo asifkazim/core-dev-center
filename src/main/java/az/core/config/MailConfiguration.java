@@ -1,6 +1,7 @@
 package az.core.config;
 
 import az.core.model.dto.UserDto;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,6 +14,7 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 @Configuration
+@Slf4j
 public class MailConfiguration {
 
     @Value("${mail.username}")
@@ -53,7 +55,7 @@ public class MailConfiguration {
             message.setSubject("Test Mail from Java Program");
             message.setText("User id:" + userDto.getId() + "User name" + userDto.getName());
             Transport.send(message);
-            System.out.println("Email Sent successfully....");
+            log.info("Email Sent successfully....");
         } catch (Exception mex) {
             mex.printStackTrace();
         }
