@@ -19,6 +19,11 @@ public class BlogCategory implements Serializable {
     private Long id;
     @Column(unique = true)
     private String name;
+//    @Column(unique = true)
+//    private String nameEn;
+//    @Column(unique = true)
+//    private String nameRu;
+
 
     @OneToMany(mappedBy = "blogCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Blog> blogs;

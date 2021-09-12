@@ -25,7 +25,6 @@ public class Course implements Serializable {
     private String courseMethod;
     private String courseProgram;
     private Boolean active;
-    @Transient
     private String image;
 
 }

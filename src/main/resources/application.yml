@@ -9,10 +9,20 @@ spring:
     generate-ddl: true
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       format_sql: true
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2KB
+      max-file-size: 500MB
+      max-request-size: 1000MB
 
+file:
+  upload:
+    acceptableVideoExtensions: mp4,mov,avi,wmv
+    acceptableImageExtensions: jpg,png,jpeg
 
 mail:
   username: asifkazim@yandex.com
@@ -20,6 +30,19 @@ mail:
   to: asifkazimov98@gmail.com
   host: smtp.yandex.com
   port: 465
+
+minio:
+  url: http://127.0.0.1:9000/
+  bucket: user
+  access-key: test
+  secret-key: test1234
+  image-folder: blogpic/
+
+application:
+  swagger:
+    title: MinIo Photo API
+    description: Spring Boot file uploading with MinIo file storage.
+    version: 0.0.2
 
 server:
   port: 8083
