@@ -1,18 +1,21 @@
 package az.core.service;
 
-import az.core.model.dto.BlogCategoryDto;
+import az.core.model.dto.request.BlogCategoryRequestDto;
+import az.core.model.dto.request.BlogRequestDto;
+import az.core.model.dto.response.BlogCategoryResponseDto;
+import az.core.model.dto.response.BlogResponseDto;
 
 import java.util.List;
 
 public interface BlogCategoryService {
 
-    List<BlogCategoryDto> getAllCategories();
+    List<BlogCategoryResponseDto> getAllCategories();
 
-    BlogCategoryDto getById(Long id);
+    BlogCategoryResponseDto getById(Long id);
 
-    BlogCategoryDto updateCategory(Long id, BlogCategoryDto blogCategoryDto);
+    BlogCategoryResponseDto updateCategory(Long id, BlogCategoryRequestDto categoryRequestDto);
 
-    void deleteCategory(Long id);
+    BlogCategoryResponseDto deleteCategory(Long id);
 
-    void addCategory(String categoryName);
+    BlogCategoryResponseDto addCategory(BlogCategoryRequestDto categoryRequestDto);
 }

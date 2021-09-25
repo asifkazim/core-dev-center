@@ -1,18 +1,21 @@
 package az.core.service;
 
-import az.core.model.dto.CourseCategoryDto;
+import az.core.model.dto.request.CourseCategoryRequestDto;
+import az.core.model.dto.request.CourseCategoryRequestDto;
+import az.core.model.dto.response.CourseCategoryResponseDto;
+import az.core.model.dto.response.CourseCategoryResponseDto;
 
 import java.util.List;
 
 public interface CourseCategoryService {
 
-    List<CourseCategoryDto> getAllCategories();
+    List<CourseCategoryResponseDto> getAllCategories();
 
-    CourseCategoryDto getById(Long id);
+    CourseCategoryResponseDto getById(Long id);
 
-    void addCategory(String categoryName);
+    CourseCategoryResponseDto updateCategory(Long id, CourseCategoryRequestDto categoryRequestDto);
 
-    CourseCategoryDto updateCategory(Long id, CourseCategoryDto courseCategoryDto);
+    CourseCategoryResponseDto deleteCategory(Long id);
 
-    void deleteCategory(Long id);
+    CourseCategoryResponseDto addCategory(CourseCategoryRequestDto categoryRequestDto);
 }

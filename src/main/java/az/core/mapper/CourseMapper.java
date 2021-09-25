@@ -1,10 +1,13 @@
 package az.core.mapper;
 
-import az.core.model.dto.CourseDto;
+import az.core.model.dto.request.CourseRequestDto;
+import az.core.model.dto.response.CourseResponseDto;
 import az.core.model.entity.Course;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring",
@@ -12,9 +15,16 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface CourseMapper {
 
-    List<CourseDto> entitiesToDto(List<Course> courses);
 
-    CourseDto entityToDto(Course course);
+    default List<CourseResponseDto> entitiesToDto(List<Course> courses){
+        List<CourseResponseDto> dtos = new ArrayList<>();
+        courses.forEach(course -> dtos.add(entityToDto(course)));
+        return dtos;
+    }
 
-    Course dtoToEntity(CourseDto courseDto);
+    @Mapping(target = "courseCategory", source = "courseCategory.name")
+    CourseResponseDto entityToDto(Course course);
+
+    @Mapping(target = "courseCategory", ignore = true)
+    Course dtoToEntity(CourseRequestDto courseRequestDto);
 }

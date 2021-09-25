@@ -1,10 +1,13 @@
 package az.core.mapper;
 
-import az.core.model.dto.EventDto;
+import az.core.model.dto.request.EventRequestDto;
+import az.core.model.dto.response.BlogResponseDto;
+import az.core.model.dto.response.EventResponseDto;
 import az.core.model.entity.Event;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring",
@@ -12,9 +15,13 @@ import java.util.List;
         unmappedSourcePolicy = ReportingPolicy.IGNORE)
 public interface EventMapper {
 
-    List<EventDto> entitiesToDto(List<Event> events);
+    default List<EventResponseDto> entitiesToDto(List<Event> events){
+        List<EventResponseDto> dtos = new ArrayList<>();
+        events.forEach(event -> dtos.add(entityToDto(event)));
+        return dtos;
+    }
 
-    EventDto entityToDto(Event event);
+    EventResponseDto entityToDto(Event event);
 
-    Event dtoToEntity(EventDto eventDto);
+    Event dtoToEntity(EventRequestDto eventRequestDto);
 }

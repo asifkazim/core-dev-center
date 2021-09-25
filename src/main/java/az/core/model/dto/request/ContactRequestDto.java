@@ -1,19 +1,14 @@
-package az.core.model.dto;
+package az.core.model.dto.request;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-public class ContactDto {
-
-    private Long id;
+public class ContactRequestDto {
     private String name;
     private String surname;
     private String email;
     private String header;
     private String message;
-
 }

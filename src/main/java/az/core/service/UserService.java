@@ -1,17 +1,19 @@
 package az.core.service;
 
-import az.core.model.dto.UserDto;
+import az.core.model.dto.request.UserRequestDto;
+import az.core.model.dto.response.UserResponseDto;
+import az.core.model.dto.response.UserResponseDto;
 
 import java.util.List;
 
 public interface UserService {
-    List<UserDto> getAllUsers();
+    List<UserResponseDto> getAllUsers();
 
-    UserDto getById(Long id);
+    UserResponseDto getById(Long id);
 
-    UserDto addUser(UserDto userDto);
+    UserResponseDto updateUser(Long id, UserRequestDto userRequestDto);
 
-    UserDto updateUser(Long id, UserDto userDto);
+    UserResponseDto deleteUser(Long id);
 
-    void deleteUser(Long id);
+    UserResponseDto addUser(UserRequestDto userRequestDto);
 }

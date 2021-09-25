@@ -7,12 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity
 public class Contact implements Serializable {
     @Id
     @GeneratedValue

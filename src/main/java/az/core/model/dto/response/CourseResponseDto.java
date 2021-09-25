@@ -1,23 +1,16 @@
-package az.core.model.entity;
+package az.core.model.dto.response;
 
-import lombok.*;
-
-import javax.persistence.*;
-import java.io.Serializable;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@Entity
-public class Course implements Serializable {
-
-    @Id
-    @GeneratedValue
+public class CourseResponseDto {
     private Long id;
     private String name;
     private String cost;
     private String time;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CourseCategory courseCategory;
+    private String courseCategory;
     private String description;
     private String courseMethod;
     private String courseProgram;

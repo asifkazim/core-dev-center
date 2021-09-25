@@ -1,6 +1,8 @@
 package az.core.controller;
 
-import az.core.model.dto.CourseCategoryDto;
+import az.core.model.dto.request.CourseCategoryRequestDto;
+import az.core.model.dto.response.CourseCategoryResponseDto;
+import az.core.model.dto.response.CourseCategoryResponseDto;
 import az.core.service.CourseCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,30 +19,31 @@ public class CourseCategoryController {
     private final CourseCategoryService courseCategoryService;
 
     @GetMapping
-    public ResponseEntity<List<CourseCategoryDto>> getAllCourseCategories() {
-        List<CourseCategoryDto> categories = courseCategoryService.getAllCategories();
+    public ResponseEntity<List<CourseCategoryResponseDto>> getAllCategories() {
+        List<CourseCategoryResponseDto> categories = courseCategoryService.getAllCategories();
         return ResponseEntity.ok(categories);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CourseCategoryDto> getById(@PathVariable Long id) {
-        CourseCategoryDto categoryDto = courseCategoryService.getById(id);
+    public ResponseEntity<CourseCategoryResponseDto> getById(@PathVariable Long id) {
+        CourseCategoryResponseDto categoryDto = courseCategoryService.getById(id);
         return ResponseEntity.ok(categoryDto);
     }
 
     @PostMapping()
-    public ResponseEntity<?> addCourseCategory(@RequestBody String categoryName) {
-        courseCategoryService.addCategory(categoryName);
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+    public ResponseEntity<CourseCategoryResponseDto> addCourseCategory(@RequestBody CourseCategoryRequestDto courseCategoryRequestDto) {
+        CourseCategoryResponseDto responseDto = courseCategoryService.addCategory(courseCategoryRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @PutMapping("/{id}")
-    public CourseCategoryDto updateCourseCategory(@PathVariable Long id, @RequestBody CourseCategoryDto courseCategoryDto) {
-        return courseCategoryService.updateCategory(id, courseCategoryDto);
+    public ResponseEntity<CourseCategoryResponseDto> updateCourseCategory(@PathVariable Long id, @RequestBody CourseCategoryRequestDto courseCategoryRequestDto) {
+        CourseCategoryResponseDto responseDto = courseCategoryService.updateCategory(id, courseCategoryRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCourseCategory(@PathVariable Long id) {
-        courseCategoryService.deleteCategory(id);
+    public ResponseEntity<CourseCategoryResponseDto> deleteCourseCategory(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(courseCategoryService.deleteCategory(id));
     }
 }

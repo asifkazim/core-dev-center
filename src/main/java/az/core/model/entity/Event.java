@@ -9,12 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.Serializable;
 
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity
 public class Event implements Serializable {
 
     @Id
@@ -29,6 +26,5 @@ public class Event implements Serializable {
     private String remainingPeriod;
     private String moderator;
     private String status;
-    @Transient
-    private MultipartFile image;
+    private String image;
 }

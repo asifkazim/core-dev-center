@@ -5,12 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity
 public class User implements Serializable {
 
     @Id

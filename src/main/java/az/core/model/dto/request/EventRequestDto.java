@@ -1,15 +1,11 @@
-package az.core.model.dto;
+package az.core.model.dto.request;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-public class EventDto {
-    private Long id;
+public class EventRequestDto {
     private String name;
     private String startTime;
     private String payment;
@@ -19,5 +15,4 @@ public class EventDto {
     private String remainingPeriod;
     private String moderator;
     private String status;
-    private MultipartFile image;
 }

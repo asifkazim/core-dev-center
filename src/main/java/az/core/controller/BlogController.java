@@ -1,6 +1,7 @@
 package az.core.controller;
 
-import az.core.model.dto.BlogDto;
+import az.core.model.dto.request.BlogRequestDto;
+import az.core.model.dto.response.BlogResponseDto;
 import az.core.model.dto.FileDto;
 import az.core.service.BlogService;
 import lombok.RequiredArgsConstructor;
@@ -25,34 +26,34 @@ public class BlogController {
     private String imageFolder;
 
     @GetMapping
-    public ResponseEntity<List<BlogDto>> getAllBlogs() {
-        List<BlogDto> blogs = blogService.getAllBlogs();
+    public ResponseEntity<List<BlogResponseDto>> getAllBlogs() {
+        List<BlogResponseDto> blogs = blogService.getAllBlogs();
         return ResponseEntity.ok(blogs);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<BlogDto> getById(@PathVariable Long id) {
-        BlogDto blog = blogService.getById(id);
+    public ResponseEntity<BlogResponseDto> getById(@PathVariable Long id) {
+        BlogResponseDto blog = blogService.getById(id);
         return ResponseEntity.ok(blog);
     }
 
     @PostMapping
-    public ResponseEntity<BlogDto> addBlog(@Valid @RequestBody BlogDto blogDto) throws Exception {
-        BlogDto blog = blogService.addBlog(blogDto);
+    public ResponseEntity<BlogResponseDto> addBlog(@Valid @RequestBody BlogRequestDto blogRequestDto) throws Exception {
+        BlogResponseDto blog = blogService.addBlog(blogRequestDto);
         return ResponseEntity.ok(blog);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BlogDto> updateBlog(@PathVariable Long id, @RequestBody BlogDto blogDto) {
-        BlogDto blog = blogService.updateBlog(id, blogDto);
+    public ResponseEntity<BlogResponseDto> updateBlog(@PathVariable("id") Long id, @RequestBody BlogRequestDto blogRequestDto) {
+        BlogResponseDto blog = blogService.updateBlog(id, blogRequestDto);
         return ResponseEntity.ok(blog);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<BlogDto> deleteBlog(@PathVariable Long id) {
+    public ResponseEntity<BlogResponseDto> deleteBlog(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(blogService.deleteBlog(id));
     }
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @PostMapping(value = "/image/{id}")
     public ResponseEntity<FileDto> createImage(@PathVariable Long id, @Valid @RequestParam MultipartFile file) {

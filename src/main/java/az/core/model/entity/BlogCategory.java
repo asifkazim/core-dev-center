@@ -5,13 +5,9 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-@Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
+@Entity
 public class BlogCategory implements Serializable {
 
     @Id
@@ -19,11 +15,6 @@ public class BlogCategory implements Serializable {
     private Long id;
     @Column(unique = true)
     private String name;
-//    @Column(unique = true)
-//    private String nameEn;
-//    @Column(unique = true)
-//    private String nameRu;
-
 
     @OneToMany(mappedBy = "blogCategory", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Blog> blogs;

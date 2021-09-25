@@ -1,16 +1,11 @@
-package az.core.model.dto;
+package az.core.model.dto.request;
 
-import lombok.Getter;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-
-
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
-public class CourseDto {
-    private Long id;
+public class CourseRequestDto {
     private String name;
     private String cost;
     private String time;
@@ -19,6 +14,4 @@ public class CourseDto {
     private String courseMethod;
     private String courseProgram;
     private Boolean active;
-    private String image;
-
 }

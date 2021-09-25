@@ -1,8 +1,10 @@
 package az.core.controller;
 
-import az.core.model.dto.ContactDto;
+import az.core.model.dto.response.ContactResponseDto;
+import az.core.model.dto.request.ContactRequestDto;
 import az.core.service.ContactService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,31 +17,32 @@ public class ContactController {
     private final ContactService contactService;
 
     @GetMapping
-    public ResponseEntity<List<ContactDto>> getAllContacts() {
-        List<ContactDto> contacts = contactService.getAllContacts();
-        return ResponseEntity.ok(contacts);
+    public ResponseEntity<List<ContactResponseDto>> getAllCategories() {
+        List<ContactResponseDto> categories = contactService.getAllContacts();
+        return ResponseEntity.ok(categories);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ContactDto> getById(@PathVariable Long id) {
-        ContactDto contact = contactService.getById(id);
-        return ResponseEntity.ok(contact);    }
+    public ResponseEntity<ContactResponseDto> getById(@PathVariable Long id) {
+        ContactResponseDto categoryDto = contactService.getById(id);
+        return ResponseEntity.ok(categoryDto);
+    }
 
-    @PostMapping
-    public ResponseEntity<ContactDto> addContact(@RequestBody ContactDto contactDto) {
-        ContactDto contact = contactService.addContact(contactDto);
-        return ResponseEntity.ok(contact);
+    @PostMapping()
+    public ResponseEntity<ContactResponseDto> addContact(@RequestBody ContactRequestDto contactRequestDto) {
+        ContactResponseDto responseDto = contactService.addContact(contactRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ContactDto> updateContact(@PathVariable Long id, @RequestBody ContactDto contactDto) {
-        ContactDto contact = contactService.updateContact(id, contactDto);
-        return ResponseEntity.ok(contact);
+    public ResponseEntity<ContactResponseDto> updateContact(@PathVariable Long id, @RequestBody ContactRequestDto contactRequestDto) {
+        ContactResponseDto responseDto = contactService.updateContact(id, contactRequestDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteContact(@PathVariable Long id) {
-        contactService.deleteContact(id);
+    public ResponseEntity<ContactResponseDto> deleteContact(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(contactService.deleteContact(id));
     }
 
 }

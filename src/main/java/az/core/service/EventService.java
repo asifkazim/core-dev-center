@@ -1,17 +1,30 @@
 package az.core.service;
 
-import az.core.model.dto.EventDto;
+import az.core.model.dto.request.EventRequestDto;
+import az.core.model.dto.response.BlogResponseDto;
+import az.core.model.dto.response.EventResponseDto;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 public interface EventService {
-    List<EventDto> getAllEvents();
+    List<EventResponseDto> getAllEvents();
 
-    EventDto getById(Long id);
+    EventResponseDto getById(Long id);
 
-    EventDto addEvent(EventDto eventDto);
+    EventResponseDto addEvent(EventRequestDto eventRequestDto);
 
-    EventDto updateEvent(Long id, EventDto eventDto);
+    EventResponseDto updateEvent(Long id, EventRequestDto eventRequestDto);
 
-    void deleteEvent(Long id);
+    EventResponseDto deleteEvent(Long id);
+
+    String uploadImage(MultipartFile file, Long id);
+
+    String updateImage(MultipartFile file, Long id);
+
+    void deleteUserImage(Long id);
+
+    void deleteFile(String fileName, String folder);
+
+    byte[] getFile(String fileName, String folder);
 }

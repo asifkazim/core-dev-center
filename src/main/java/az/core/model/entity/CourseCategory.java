@@ -6,12 +6,9 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Entity
+@Data
 @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Getter
-@Setter
+@Entity
 public class CourseCategory implements Serializable {
 
     @Id
