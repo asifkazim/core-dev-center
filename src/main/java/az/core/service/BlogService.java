@@ -30,4 +30,5 @@ public interface BlogService {
     byte[] getFile(String fileName, String folder);
 
 
+    BlogResponseDto getByUrl(String url);
 }

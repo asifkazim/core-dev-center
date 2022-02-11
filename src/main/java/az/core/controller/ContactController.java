@@ -28,6 +28,12 @@ public class ContactController {
         return ResponseEntity.ok(categoryDto);
     }
 
+    @GetMapping("/urls/{url}")
+    public ResponseEntity<ContactResponseDto> getByUrl(@PathVariable String url) {
+        ContactResponseDto categoryDto = contactService.getByUrl(url);
+        return ResponseEntity.ok(categoryDto);
+    }
+
     @PostMapping()
     public ResponseEntity<ContactResponseDto> addContact(@RequestBody ContactRequestDto contactRequestDto) {
         ContactResponseDto responseDto = contactService.addContact(contactRequestDto);

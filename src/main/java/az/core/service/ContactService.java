@@ -16,4 +16,6 @@ public interface ContactService {
     ContactResponseDto deleteContact(Long id);
 
     ContactResponseDto addContact(ContactRequestDto categoryRequestDto);
+
+    ContactResponseDto getByUrl(String url);
 }

@@ -17,9 +17,12 @@ public class Blog implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String publicationDate;
+    @Column(unique = true)
+    private String url;
     private String title;
+    private String subTitle;
     private String description;
+    private String publicationDate;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "blogCategoryId", nullable = false)
     private BlogCategory blogCategory;

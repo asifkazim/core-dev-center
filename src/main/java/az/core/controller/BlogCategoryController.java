@@ -2,7 +2,6 @@ package az.core.controller;
 
 import az.core.model.dto.request.BlogCategoryRequestDto;
 import az.core.model.dto.response.BlogCategoryResponseDto;
-import az.core.model.dto.response.BlogResponseDto;
 import az.core.service.BlogCategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/blogs/category")
+@RequestMapping("/blogs/categories")
 @RequiredArgsConstructor
 
 public class BlogCategoryController {

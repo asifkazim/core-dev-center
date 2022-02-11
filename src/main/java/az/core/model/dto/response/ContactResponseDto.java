@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 public class ContactResponseDto {
 
     private Long id;
+    private String url;
     private String name;
     private String surname;
     private String email;

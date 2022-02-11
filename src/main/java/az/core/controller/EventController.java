@@ -38,6 +38,12 @@ public class EventController {
         return ResponseEntity.ok(event);
     }
 
+    @GetMapping("/urls/{url}")
+    public ResponseEntity<EventResponseDto> getByUrl(@PathVariable String url) {
+        EventResponseDto event = eventService.getByUrl(url);
+        return ResponseEntity.ok(event);
+    }
+
     @PostMapping
     public ResponseEntity<EventResponseDto> addEvent(@RequestBody EventRequestDto eventRequestDto) {
         EventResponseDto event = eventService.addEvent(eventRequestDto);

@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BlogResponseDto {
     private Long id;
+    private String url;
     private String publicationDate;
     private String description;
     private String title;
-    private String blogCategory;
+    private Long categoryId;
     private Boolean status;
     private String image;
 }

@@ -21,7 +21,7 @@ public interface BlogMapper {
         return dtos;
     }
 
-    @Mapping(target = "blogCategory", source = "blogCategory.name")
+    @Mapping(target = "categoryId", source = "blogCategory.id")
     BlogResponseDto entityToDto(Blog blog);
 
 

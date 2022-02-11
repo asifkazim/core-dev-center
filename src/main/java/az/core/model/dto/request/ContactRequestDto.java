@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class ContactRequestDto {
+    private String url;
     private String name;
     private String surname;
     private String email;

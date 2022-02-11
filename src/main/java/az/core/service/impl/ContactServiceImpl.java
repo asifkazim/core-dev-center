@@ -44,6 +44,17 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
+    public ContactResponseDto getByUrl(String url) {
+        log.info("getByUrl Contact started with: {}", kv("url", url));
+        Contact contact = contactRepository.findByUrl(url).orElseThrow(() -> {
+            throw new EntityNotFoundException(Contact.class, url);
+        });
+        ContactResponseDto responseDto = contactMapper.entityToDto(contact);
+        log.info("getByUrl Contact completed successfully with: {}", kv("url", url));
+        return responseDto;
+    }
+
+    @Override
     public ContactResponseDto addContact(ContactRequestDto contactRequestDto) {
         log.info("create Contact started with:{}", contactRequestDto);
         Contact contact = contactMapper.dtoToEntity(contactRequestDto);
@@ -52,6 +63,7 @@ public class ContactServiceImpl implements ContactService {
         log.info("create Contact completed successfully with: {}", kv("contact", contactResponseDto));
         return contactResponseDto;
     }
+
 
     @Override
     public ContactResponseDto updateContact(Long id, ContactRequestDto contactRequestDto) {

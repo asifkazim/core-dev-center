@@ -55,16 +55,27 @@ public class BlogServiceImpl implements BlogService {
         return blogDto;
     }
 
+    @Override
+    public BlogResponseDto getByUrl(String url) {
+        log.info("getByUrl Blog started with: {}", kv("url", url));
+        Blog blog = blogRepository.findByUrl(url).orElseThrow(() -> {
+            throw new EntityNotFoundException(Blog.class, url);
+        });
+        BlogResponseDto blogDto = blogMapper.entityToDto(blog);
+        log.info("getByUrl Blog completed successfully with: {}", kv("url", url));
+        return blogDto;    }
+
+
 
     @Override
     @Transactional
     public BlogResponseDto addBlog(BlogRequestDto blogRequestDto) {
         log.info("create Blog started with:{}", blogRequestDto);
-        log.info("Find Category By Name started with: {}", kv("name", blogRequestDto.getBlogCategory()));
-        BlogCategory category = blogCategoryRepository.findByName(blogRequestDto.getBlogCategory()).orElseThrow(() -> {
+        log.info("Find Category By Name started with: {}", kv("name", blogRequestDto.getCategoryId()));
+        BlogCategory category = blogCategoryRepository.findById(blogRequestDto.getCategoryId()).orElseThrow(() -> {
             throw new EntityNotFoundException(BlogCategory.class);
         });
-        log.info("Find Category By Name Response started with: {}", kv("name", blogRequestDto.getBlogCategory()));
+        log.info("Find Category By Name Response started with: {}", kv("name", blogRequestDto.getCategoryId()));
         Blog blog = blogMapper.dtoToEntity(blogRequestDto);
         blog.setBlogCategory(category);
         blogRepository.save(blog);
@@ -82,10 +93,12 @@ public class BlogServiceImpl implements BlogService {
         });
 
         if (blog != null) {
+            String image = blog.getImage();
             blog = blogMapper.dtoToEntity(blogRequestDto);
             blog.setId(id);
-            log.info("Find Category By Name Response started with: {}", kv("name", blogRequestDto.getBlogCategory()));
-            BlogCategory category = blogCategoryRepository.findByName(blogRequestDto.getBlogCategory()).orElseThrow(() -> {
+            blog.setImage(image);
+            log.info("Find Category By Name Response started with: {}", kv("name", blogRequestDto.getCategoryId()));
+            BlogCategory category = blogCategoryRepository.findById(blogRequestDto.getCategoryId()).orElseThrow(() -> {
                 throw new EntityNotFoundException(BlogCategory.class);
             });
             blog.setBlogCategory(category);
@@ -170,5 +183,6 @@ public class BlogServiceImpl implements BlogService {
         log.info("getFile started with {}", kv("fileName", fileName));
         return filesService.getFile(fileName, folder);
     }
+
 
 }

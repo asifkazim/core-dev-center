@@ -1,0 +1,21 @@
+package az.core.model.dto.response;
+
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+public class TrainingResponseDto {
+    private Long id;
+    private String url;
+    private String name;
+    private String cost;
+    private String time;
+    private Long categoryId;
+    private String description;
+    private String trainingMethod;
+    private String trainingProgram;
+    private Boolean status;
+    private String image;
+
+}

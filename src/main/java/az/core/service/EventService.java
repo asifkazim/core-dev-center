@@ -27,4 +27,6 @@ public interface EventService {
     void deleteFile(String fileName, String folder);
 
     byte[] getFile(String fileName, String folder);
+
+    EventResponseDto getByUrl(String url);
 }

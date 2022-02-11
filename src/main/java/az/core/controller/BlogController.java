@@ -37,6 +37,12 @@ public class BlogController {
         return ResponseEntity.ok(blog);
     }
 
+    @GetMapping("/urls/{url}")
+    public ResponseEntity<BlogResponseDto> getByUrl(@PathVariable String url) {
+        BlogResponseDto blog = blogService.getByUrl(url);
+        return ResponseEntity.ok(blog);
+    }
+
     @PostMapping
     public ResponseEntity<BlogResponseDto> addBlog(@Valid @RequestBody BlogRequestDto blogRequestDto) throws Exception {
         BlogResponseDto blog = blogService.addBlog(blogRequestDto);

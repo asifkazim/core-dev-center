@@ -7,10 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class BlogRequestDto {
-
+    private String url;
     private String publicationDate;
     private String description;
     private String title;
-    private String blogCategory;
+    private Long categoryId;
     private Boolean status;
 }

@@ -54,6 +54,17 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public EventResponseDto getByUrl(String url) {
+        log.info("getByUrl Event started with: {}", kv("url", url));
+        Event event = eventRepository.findByUrl(url).orElseThrow(() -> {
+            throw new EntityNotFoundException(Event.class, url);
+        });
+        EventResponseDto response = eventMapper.entityToDto(event);
+        log.info("getByUrl Event completed successfully with: {}", kv("url", url));
+        return response;
+    }
+
+    @Override
     public EventResponseDto addEvent(EventRequestDto eventRequestDto) {
         log.info("create Event started with:{}", eventRequestDto);
         Event event = eventMapper.dtoToEntity(eventRequestDto);
@@ -72,8 +83,10 @@ public class EventServiceImpl implements EventService {
         });
 
         if (event != null) {
+            String image = event.getImage();
             event = eventMapper.dtoToEntity(eventRequestDto);
             event.setId(id);
+            event.setImage(image);
         }
         eventRepository.save(event);
         EventResponseDto responseDto = eventMapper.entityToDto(event);
@@ -136,7 +149,7 @@ public class EventServiceImpl implements EventService {
     public void deleteUserImage(Long id) {
         log.info("deleteUserImage started from Event with {}", kv("id", id));
         Event event = eventRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException(Blog.class, id));
+                () -> new EntityNotFoundException(Event.class, id));
         if (event.getImage() != null) {
             filesService.deleteFile(event.getImage(), imageFolder);
             event.setImage(null);
@@ -155,4 +168,6 @@ public class EventServiceImpl implements EventService {
         log.info("getFile started with {}", kv("fileName", fileName));
         return filesService.getFile(fileName, folder);
     }
+
+
 }
