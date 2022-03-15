@@ -16,7 +16,7 @@ spring:
 
 mail:
   username: asifkazim@yandex.com
-  password: Menbilirem10#
+  password: 
   to: asifkazimov98@gmail.com
   host: smtp.yandex.com
   port: 465
