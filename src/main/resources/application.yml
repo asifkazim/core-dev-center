@@ -26,8 +26,8 @@ file:
 
 mail:
   username: asifkazim@yandex.com
-  password: Menbilirem10#
-  to: asifkazimov98@gmail.com
+  password: 
+  to: 
   host: smtp.yandex.com
   port: 465
 
