@@ -15,11 +15,11 @@ spring:
 
 
 mail:
-  username: asifkazim@yandex.com
+  username: 
   password: 
-  to: asifkazimov98@gmail.com
+  to: 
   host: smtp.yandex.com
   port: 465
 
 server:
-  port: 8083
+  port: 8080
